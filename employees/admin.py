@@ -6,6 +6,9 @@ from .models import Employee, Address, Employment, Qualification, HealthDetails,
 from django.contrib.auth.models import User, Group
 
 admin.site.unregister(Group)
+admin.site.site_header = "DHQ Kotli"
+admin.site.site_title = "DHQ Kotli"
+admin.site.index_title = f"Welcome to {admin.site.site_title}"
 
 
 class AddressInline(admin.TabularInline):
