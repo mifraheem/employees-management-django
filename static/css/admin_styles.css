@@ -3,3 +3,34 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+/***** Make the sidebar fixed and set a height to allow main content scroll *****/
+#jazzy-sidebar {
+  position: fixed;
+
+  height: 100%;
+  overflow-y: auto;
+  width: 250px;
+  /* Adjust this width to match your sidebar width */
+}
+
+#jazzy-navbar {
+  position: sticky;
+  top: 2px;
+}
+
+.main-content {
+  margin-left: 250px;
+  /* Adjust this to match the sidebar width */
+  overflow-y: auto;
+}
+
+/* Ensure the main content can scroll independently */
+.content-wrapper {
+  overflow-y: auto;
+  padding-left: 20px;
+}
+
+footer.main-footer .float-right {
+  display: none !important;
+}

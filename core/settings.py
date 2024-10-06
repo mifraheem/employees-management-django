@@ -25,14 +25,14 @@ SECRET_KEY = 'django-insecure-a@oxb$5&6y_3*&vggs0h=_7t9vh0osjrjb$_4hox$-oir@ev!(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['103.137.24.123', 'localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'jet.dashboard',
-    # 'jet',
+
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -134,12 +134,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JAZZMIN_SETTINGS = {
+
     "site_title": "DHQ Kotli Admin",
     "site_header": "DHQ Hospital Kotli",
     "site_brand": "DHQ Kotli",
     "welcome_sign": "Welcome to DHQ Hospital Kotli Admin Portal",
     "copyright": "DHQ Hospital © 2024",
     "search_model": ["auth.User", "employees.Employee"],
+    "show_ui_builder": False,
+
 
     "icons": {
         "auth": "fas fa-users-cog",
@@ -191,4 +194,6 @@ JAZZMIN_SETTINGS = {
 
     # Keep things looking professional
     "navigation_expanded": True,
+    "changeform_format": "tabs",
+
 }
