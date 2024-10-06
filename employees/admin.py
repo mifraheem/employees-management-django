@@ -37,18 +37,28 @@ class WorkDetailsInline(admin.TabularInline):
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    # Method to display the employee's photo
     def photo_tag(self, obj):
         if obj.photo:
             return format_html('<img src="{}" width="50" style="border-radius: 50%; aspect-ratio:1/1" />'.format(obj.photo.url))
         return "No Image"
 
-    # Short description to be shown as column header
     photo_tag.short_description = 'Photo'
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
+        if db_field.name == 'photo' and request.resolver_match.kwargs.get('object_id', None):
+            obj = self.get_object(
+                request, request.resolver_match.kwargs['object_id'])
+            if obj and obj.photo:
+                formfield.help_text = format_html(
+                    '<img src="{}" width="150" height="150" style="border-radius: 50%;" />',
+                    obj.photo.url
+                )
+        return formfield
 
     fieldsets = (
         ('Personal Information', {
-            'fields': ('name', 'father_name', 'cnic', 'date_of_birth', 'gender', 'marital_status', 'blood_group', 'mobile_no', 'email', 'photo')
+            'fields': ('photo', 'name', 'father_name', 'cnic', 'date_of_birth', 'gender', 'marital_status', 'blood_group', 'mobile_no', 'email')
         }),
         ('Additional Information', {
             'fields': ('seniority_no', 'personnel_no', 'remarks'),
@@ -58,7 +68,6 @@ class EmployeeAdmin(admin.ModelAdmin):
     inlines = [AddressInline, EmploymentInline,
                QualificationInline, HealthDetailsInline, WorkDetailsInline]
 
-    # Add 'photo_tag' to the list_display to show the photo in the list
     list_display = ('photo_tag', 'name', 'cnic', 'email',
                     'mobile_no', 'gender', 'marital_status')
 
