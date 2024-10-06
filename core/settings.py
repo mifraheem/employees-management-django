@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jet.dashboard',
-    'jet',
+    # 'jet.dashboard',
+    # 'jet',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,6 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_URL = '/static/'  # This should be set to the correct URL for serving static files
+# This is important to tell Django where your static files are located
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 # Base url to serve media files
 MEDIA_URL = '/media/'
 
@@ -128,3 +133,62 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+JAZZMIN_SETTINGS = {
+    "site_title": "DHQ Kotli Admin",
+    "site_header": "DHQ Hospital Kotli",
+    "site_brand": "DHQ Kotli",
+    "welcome_sign": "Welcome to DHQ Hospital Kotli Admin Portal",
+    "copyright": "DHQ Hospital © 2024",
+    "search_model": ["auth.User", "employees.Employee"],
+
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.User": "fas fa-user-circle",
+        "employees.Employee": "fas fa-user-md",
+        "employees.Address": "fas fa-map-marker-alt",
+        "employees.Employment": "fas fa-briefcase-medical",
+        "employees.HealthDetails": "fas fa-heartbeat",
+        "employees.WorkDetails": "fas fa-hospital",
+    },
+
+    # Top navigation bar (you can customize the appearance here)
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index",
+            "permissions": ["auth.view_user"]},
+        {"name": "Users", "url": "auth:user_changelist",
+            "permissions": ["auth.view_user"]},
+        {"name": "Employees", "url": "employees:employee_changelist"},
+    ],
+
+    # Custom navigation bar (useful for large apps)
+    "usermenu_links": [
+        {"name": "Profile", "url": "admin:auth_user_change", "new_window": False},
+        {"model": "auth.user"}
+    ],
+
+    # Branding the logo
+    # Provide your hospital logo image path here
+    "site_logo": "img/logo.jpg",
+    "site_logo_classes": "img-circle",
+
+    # Themes and colors (you can change the theme and look)
+    # Options: 'lux', 'cosmo', 'cyborg', 'simplex', 'slate', etc.
+    "theme": "cosmo",
+    "dark_mode_theme": "slate",  # Customize dark mode as well
+
+    # Related modal options
+    "related_modal_active": True,
+
+    # Make your list view action buttons smaller or larger
+    "actions_sticky_top": True,
+
+    "custom_css": "css/admin_styles.css",
+    "custom_js": None,
+
+    "hide_apps": [],
+    "hide_models": [],
+    "order_with_respect_to": ["auth", "employees"],
+
+    # Keep things looking professional
+    "navigation_expanded": True,
+}

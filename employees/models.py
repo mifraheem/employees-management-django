@@ -49,7 +49,7 @@ class Employee(models.Model):
     cnic = models.CharField(max_length=13, unique=True)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=10, choices=[
-        ('M', 'Male'), ('F', 'Female')
+        ('M', 'Male'), ('F', 'Female'), ('O', 'Other')
     ])
     marital_status = models.CharField(
         max_length=10, choices=MARITAL_STATUS_CHOICES)

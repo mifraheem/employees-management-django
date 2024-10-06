@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <h1 class="mb-4" style="text-align: center;">Welcome to DHQ Admin Dashboard</h1>
+
+    <div class="row">
+        <!-- Users Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <!-- Font Awesome icon with color -->
+                    <i class="fas fa-users fa-5x" style="color: #1abc9c;"></i>
+                    <h2><a href="{% url 'admin:auth_user_changelist' %}">Users</a></h2>
+                    <p><a href="{% url 'admin:auth_user_add' %}" class="btn btn-primary">Add User</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employees Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <!-- Font Awesome icon with color -->
+                    <i class="fas fa-user-md fa-5x" style="color: #3498db;"></i>
+                    <h2><a href="{% url 'admin:employees_employee_changelist' %}">Employees</a></h2>
+                    <p><a href="{% url 'admin:employees_employee_add' %}" class="btn btn-primary">Add Employee</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
